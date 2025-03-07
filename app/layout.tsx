@@ -29,7 +29,7 @@ export default function RootLayout({
             <aside className="place-items-center">
               <Sidebar />
             </aside>
-            <section className="col-span-2 bg-gray-200 rounded-tl-4xl p-8">
+            <section className="col-span-2 bg-gray-100 rounded-tl-4xl p-8">
               {children}
             </section>
           </main>

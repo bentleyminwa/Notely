@@ -13,17 +13,17 @@ export const siteConfig = {
     {
       href: "/",
       label: "Home",
-      icon: <HomeIcon />,
+      icon: <HomeIcon width={30} />,
     },
     {
       href: "/notes",
       label: "Notes",
-      icon: <ClipboardDocumentListIcon />,
+      icon: <ClipboardDocumentListIcon width={30} />,
     },
     {
       href: "/folders",
       label: "Folders",
-      icon: <FolderIcon />,
+      icon: <FolderIcon width={30} />,
     },
   ],
 };

@@ -8,7 +8,13 @@ export default function Sidebar() {
       <ul>
         {navItems.map((navItem) => (
           <li key={navItem.label}>
-            <Link href={navItem.href}>{navItem.label}</Link>
+            <Link
+              href={navItem.href}
+              className="flex items-center gap-3 mb-3 p-3"
+            >
+              <span>{navItem.icon}</span>
+              <span className="text-lg font-semibold">{navItem.label}</span>
+            </Link>
           </li>
         ))}
       </ul>

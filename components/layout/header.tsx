@@ -15,7 +15,10 @@ export default function Header() {
           height={50}
           priority
         />
-        <Link href="/" className="text-2xl font-semibold tracking-wide">
+        <Link
+          href="/"
+          className="text-2xl font-semibold tracking-wide uppercase"
+        >
           Notely
         </Link>
       </div>

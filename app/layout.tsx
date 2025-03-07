@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import Sidebar from "@/components/layout/sidebar";
-import { nunito } from "@/config/fonts";
+import { fredoka } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} antialiased`}>
+      <body className={`${fredoka.className} antialiased`}>
         <Providers>
           <header className="mb-4">
             <Header />

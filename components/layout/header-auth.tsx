@@ -9,8 +9,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui";
 import * as actions from "@/lib/actions";
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function HeaderAuth() {
   const { data, status } = useSession();
@@ -27,7 +27,7 @@ export default function HeaderAuth() {
         <h3>{data.user.name}</h3>
         <Popover>
           <PopoverTrigger>
-            <Avatar>
+            <Avatar className="border-2 border-red-500 w-[40px] h-[40px] cursor-pointer">
               <AvatarImage src={data.user.image || ""} />
             </Avatar>
           </PopoverTrigger>
@@ -35,9 +35,15 @@ export default function HeaderAuth() {
             <form action={actions.signOut}>
               <Button type="submit">
                 <span>
-                  <ArrowRightStartOnRectangleIcon />
+                  <Image
+                    src="/closeddoor.png"
+                    alt="open door"
+                    width={30}
+                    height={30}
+                  />
                 </span>
-                <span>Logout</span>
+
+                <span>Log Out</span>
               </Button>
             </form>
           </PopoverContent>
@@ -47,8 +53,21 @@ export default function HeaderAuth() {
   } else {
     content = (
       <form action={actions.signIn}>
-        <Button type="submit" className="cursor-pointer">
-          Log In
+        <Button
+          type="submit"
+          className="cursor-pointer flex items-center gap-2"
+        >
+          <span>
+            <Image
+              src="/opendoor.png"
+              alt="open door"
+              width={30}
+              height={30}
+              className="my-2"
+            />
+          </span>
+
+          <span>Log In</span>
         </Button>
       </form>
     );

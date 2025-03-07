@@ -7,17 +7,23 @@ import {
   PopoverTrigger,
   Textarea,
 } from "@/components/ui";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default function FolderCreateForm() {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="border-2 border-dashed border-spacing-10 border-gray-300 p-7 flex flex-col gap-2 justify-center items-center cursor-pointer hover:border-green-500 transition duration-200 ease-in-out">
+        <div className="group  border-2 border-dashed border-spacing-10 border-gray-300 p-7 flex flex-col gap-2 justify-center items-center cursor-pointer hover:border-green-500 transition duration-200 ease-in-out">
           <span>
-            <PencilSquareIcon width={30} />
+            <Image
+              src="/newfolder.png"
+              alt="new folder"
+              width={40}
+              height={40}
+              className="group-hover:scale-110 transition duration-200 ease-in-out"
+            />
           </span>
-          <span className="text-sm font-semibold">New Note</span>
+          <span className="font-semibold tracking-wider">New Folder</span>
         </div>
       </PopoverTrigger>
       <PopoverContent>

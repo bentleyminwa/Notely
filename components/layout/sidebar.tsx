@@ -10,7 +10,7 @@ export default function Sidebar() {
   const { navItems } = siteConfig;
 
   return (
-    <nav>
+    <nav className="mt-10">
       <ul>
         {navItems.map((navItem) => (
           <li key={navItem.label}>
@@ -18,11 +18,15 @@ export default function Sidebar() {
               href={navItem.href}
               className={clsx(
                 "flex items-center gap-3 mb-3 p-3 rounded-lg",
-                pathname === navItem.href ? "bg-green-200" : "hover:bg-gray-100"
+                pathname === navItem.href
+                  ? "bg-green-200"
+                  : "hover:bg-gray-100 hover:scale-110 transition duration-200 ease-in-out"
               )}
             >
               <span>{navItem.icon}</span>
-              <span className="text-lg font-semibold">{navItem.label}</span>
+              <span className="text-lg font-semibold tracking-wider">
+                {navItem.label}
+              </span>
             </Link>
           </li>
         ))}

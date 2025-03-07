@@ -15,6 +15,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  notes         Note[]
+  folder        Folder[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,4 +61,31 @@ model VerificationToken {
   expires    DateTime
  
   @@unique([identifier, token])
+}
+
+model Folder {
+  id          String @id @default(cuid())
+  slug        String @unique
+  description String
+  userId      String
+  notes       Note[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id      String @id @default(cuid())
+  title   String
+  content String
+  userId  String
+  folderId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folder    Folder     @relation(fields: [folderId], references: [id])
 }

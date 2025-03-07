@@ -25,7 +25,7 @@ export default function Header() {
 
       {/* ===== search input ===== */}
       <form className="w-full">
-        <Input placeholder="search notely..." className="w-1/2" />
+        <Input placeholder="search notely..." className="w-1/2 rounded-full" />
       </form>
 
       {/* ===== header auth ===== */}

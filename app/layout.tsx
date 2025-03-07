@@ -21,17 +21,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
-        <header className="mb-4">
-          <Header />
-        </header>
-        <main className="grid grid-cols-[1fr_2fr_1fr] min-h-[89vh]">
-          <aside className="place-items-center">
-            <Sidebar />
-          </aside>
-          <section className="col-span-2 bg-gray-200 rounded-tl-4xl p-8">
-            <Providers>{children}</Providers>
-          </section>
-        </main>
+        <Providers>
+          <header className="mb-4">
+            <Header />
+          </header>
+          <main className="grid grid-cols-[1fr_2fr_1fr] min-h-[89vh]">
+            <aside className="place-items-center">
+              <Sidebar />
+            </aside>
+            <section className="col-span-2 bg-gray-200 rounded-tl-4xl p-8">
+              {children}
+            </section>
+          </main>
+        </Providers>
       </body>
     </html>
   );

@@ -24,10 +24,10 @@ export default function HeaderAuth() {
   if (data?.user) {
     content = (
       <div className="flex items-center gap-3">
-        <h3>{data.user.name}</h3>
+        <h3 className="tracking-wide">{data.user.name}</h3>
         <Popover>
           <PopoverTrigger>
-            <Avatar className="border-2 border-red-500 w-[40px] h-[40px] cursor-pointer">
+            <Avatar className="w-[40px] h-[40px] cursor-pointer">
               <AvatarImage src={data.user.image || ""} />
             </Avatar>
           </PopoverTrigger>

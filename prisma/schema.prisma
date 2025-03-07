@@ -66,7 +66,7 @@ model VerificationToken {
 model Folder {
   id          String @id @default(cuid())
   slug        String @unique
-  description String
+  description String?
   userId      String
   notes       Note[]
 

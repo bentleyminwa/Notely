@@ -8,3 +8,11 @@ export function fetchRecentFolders() {
     take: 3,
   });
 }
+
+export function fetchAllFolders() {
+  return db.folder.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}

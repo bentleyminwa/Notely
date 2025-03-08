@@ -15,10 +15,7 @@ export default function FolderItem({ folder }: FolderItemProps) {
   }).format(date);
 
   return (
-    <div
-      key={folder.id}
-      className="border border-gray-400 rounded-3xl p-5 space-y-4 bg-green-200 group hover:shadow"
-    >
+    <div className="border border-gray-400 rounded-3xl p-5 space-y-4 bg-green-200 group hover:shadow">
       <div className="flex items-center justify-between">
         <Image src="/folder.png" alt="folder" width={50} height={50} />
         <Image src="/ellipsis.png" alt="ellipsis" width={30} height={30} />

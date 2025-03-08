@@ -16,3 +16,20 @@ export function fetchAllFolders() {
     },
   });
 }
+
+export function fetchRecentNotes() {
+  return db.note.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 3,
+  });
+}
+
+export function fetchAllNotes() {
+  return db.note.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}

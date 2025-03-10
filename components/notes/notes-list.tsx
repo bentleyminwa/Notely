@@ -8,7 +8,7 @@ interface NotesListProps {
 export default async function NotesList({ fetchData }: NotesListProps) {
   const notes = await fetchData();
 
-  if (!notes) return <div>No notes have been created...</div>;
+  if (!notes) return <div>No notes found...</div>;
 
   return (
     <section className="grid grid-cols-3 gap-4">

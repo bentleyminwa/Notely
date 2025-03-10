@@ -33,3 +33,9 @@ export function fetchAllNotes() {
     },
   });
 }
+
+export function fetchNotesByFolderSlug(slug: string) {
+  return db.note.findMany({
+    where: { folder: { slug: slug } },
+  });
+}

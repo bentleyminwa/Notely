@@ -6,41 +6,41 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-const createFolderSchema = z.object({
-  title: z
-    .string()
-    .min(3, "The title is too short!")
-    .max(50, "This folder title is too long!"),
-  description: z.string(),
+const createNoteSchema = z.object({
+  title: z.string().min(3, "The title is too short!"),
+  content: z.string().min(3, "The content is too short!"),
   userId: z.string().cuid(),
+  folderId: z.string().nonempty("Please select a folder"),
 });
 
-export interface CreateFolderFormState {
+export interface CreateNoteFormState {
   errors: {
     title?: string[];
-    description?: string[];
+    content?: string[];
+    folderId?: string[];
     _form?: string[];
   };
 }
 
-export async function createFolder(
-  prevState: CreateFolderFormState,
+export async function createNote(
+  prevState: CreateNoteFormState,
   formData: FormData
-): Promise<CreateFolderFormState> {
+): Promise<CreateNoteFormState> {
   const session = await auth();
 
   if (!session) {
     return {
       errors: {
-        _form: ["You must be signed in to create a folder."],
+        _form: ["You must be signed in to create a note."],
       },
     };
   }
 
-  const result = createFolderSchema.safeParse({
+  const result = createNoteSchema.safeParse({
     title: formData.get("title"),
-    description: formData.get("description"),
+    content: formData.get("content"),
     userId: session.user?.id,
+    folderId: formData.get("folderId"),
   });
 
   if (!result.success) {
@@ -50,11 +50,12 @@ export async function createFolder(
   }
 
   try {
-    await db.folder.create({
+    await db.note.create({
       data: {
-        slug: result.data.title,
-        description: result.data.description,
+        title: result.data.title,
+        content: result.data.content,
         userId: result.data.userId,
+        folderId: result.data.folderId,
       },
     });
   } catch (err: unknown) {
@@ -74,5 +75,5 @@ export async function createFolder(
   }
 
   revalidatePath("/");
-  redirect("/folders");
+  redirect("/");
 }

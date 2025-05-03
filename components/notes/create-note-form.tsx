@@ -26,7 +26,7 @@ interface NoteCreateFormProps {
 }
 
 export default function NoteCreateForm({ folders }: NoteCreateFormProps) {
-  const [state, formAction, pending] = useActionState(actions.createNote, {
+  const [state, formAction, isPending] = useActionState(actions.createNote, {
     errors: {},
   });
 
@@ -110,8 +110,8 @@ export default function NoteCreateForm({ folders }: NoteCreateFormProps) {
               </p>
             )}
           </div>
-          <Button type="submit" disabled={pending}>
-            Create Note
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Creating note..." : "Create note"}
           </Button>
         </form>
       </PopoverContent>

@@ -6,41 +6,41 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-const createNoteSchema = z.object({
-  title: z.string().min(3, "The title is too short!"),
-  content: z.string().min(3, "The content is too short!"),
+const createFolderSchema = z.object({
+  title: z
+    .string()
+    .min(3, "The title is too short!")
+    .max(50, "This folder title is too long!"),
+  description: z.string(),
   userId: z.string().cuid(),
-  folderId: z.string().nonempty("Please select a folder"),
 });
 
-export interface CreateNoteFormState {
+export interface CreateFolderFormState {
   errors: {
     title?: string[];
-    content?: string[];
-    folderId?: string[];
+    description?: string[];
     _form?: string[];
   };
 }
 
-export async function createNote(
-  prevState: CreateNoteFormState,
+export async function createFolder(
+  prevState: CreateFolderFormState,
   formData: FormData
-): Promise<CreateNoteFormState> {
+): Promise<CreateFolderFormState> {
   const session = await auth();
 
   if (!session) {
     return {
       errors: {
-        _form: ["You must be signed in to create a note."],
+        _form: ["You must be signed in to create a folder."],
       },
     };
   }
 
-  const result = createNoteSchema.safeParse({
+  const result = createFolderSchema.safeParse({
     title: formData.get("title"),
-    content: formData.get("content"),
+    description: formData.get("description"),
     userId: session.user?.id,
-    folderId: formData.get("folderId"),
   });
 
   if (!result.success) {
@@ -50,12 +50,11 @@ export async function createNote(
   }
 
   try {
-    await db.note.create({
+    await db.folder.create({
       data: {
-        title: result.data.title,
-        content: result.data.content,
+        slug: result.data.title,
+        description: result.data.description,
         userId: result.data.userId,
-        folderId: result.data.folderId,
       },
     });
   } catch (err: unknown) {
@@ -75,5 +74,5 @@ export async function createNote(
   }
 
   revalidatePath("/");
-  redirect("/notes");
+  redirect("/");
 }
